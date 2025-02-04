@@ -1,24 +1,42 @@
-# README
+## データベース設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Users テーブル
 
-Things you may want to cover:
+| Column              | Type   | Options                   |
+|---------------------|--------|---------------------------|
+| name                | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
 
-* Ruby version
+#### Association
 
-* System dependencies
+- has_many :movies
+- has_many :chats
 
-* Configuration
+### Movies テーブル
 
-* Database creation
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| title              | string     | null: false                    |
+| description        | text       |                                |
+| user               | references | null: false, foreign_key: true | 
+| streaming_ur       | string     |                                | 
+| api_movie_id       | string     |                                | 
 
-* Database initialization
 
-* How to run the test suite
+#### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_many :chats
 
-* Deployment instructions
+### Chats テーブル
+| Column         | Type       | Options                        |
+|----------------|------------|--------------------------------|
+| content        | text       | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
-* ...
+#### Association
+
+- belongs_to :user
+- belongs_to :movie
