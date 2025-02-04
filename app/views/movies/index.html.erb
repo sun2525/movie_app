@@ -1,2 +1,13 @@
-<h1>Movies#index</h1>
-<p>Find me in app/views/movies/index.html.erb</p>
+<h1>映画一覧</h1>
+
+<!-- 映画の新規投稿ページへのリンク -->
+<%= link_to "新規投稿", new_movie_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @movies.each do |movie| %>
+    <li>
+      <!-- 映画のタイトルをクリックすると詳細ページに移動 -->
+      <%= link_to movie.title, movie %> - <%= movie.description %>
+    </li>
+  <% end %>
+</ul>

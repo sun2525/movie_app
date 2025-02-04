@@ -1,0 +1,13 @@
+<h1><%= @movie.title %></h1>
+
+<!-- 映画の説明を表示 -->
+<p><%= @movie.description %></p>
+
+<!-- 映画の視聴リンクがある場合は表示 -->
+<p>視聴リンク: <%= link_to @movie.streaming_url, @movie.streaming_url if @movie.streaming_url.present? %></p>
+
+<!-- 映画を編集するリンク -->
+<%= link_to "編集", edit_movie_path(@movie), class: "btn btn-warning" %>
+
+<!-- 映画を削除するボタン -->
+<%= link_to "削除", @movie, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
