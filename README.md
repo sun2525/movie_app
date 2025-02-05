@@ -20,7 +20,7 @@
 | title              | string     | null: false                    |
 | description        | text       |                                |
 | user               | references | null: false, foreign_key: true | 
-| streaming_ur       | string     |                                | 
+| streaming_url       | string     |                                | 
 | api_movie_id       | string     |                                | 
 
 
@@ -32,9 +32,9 @@
 ### Chats テーブル
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
-| content        | text       | null: false                    |
+| message        | text       | null: false                    |
 | user           | references | null: false, foreign_key: true |
-| item           | references | null: false, foreign_key: true |
+| movie           | references | null: false, foreign_key: true |
 
 #### Association
 

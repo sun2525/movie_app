@@ -6,6 +6,9 @@
 <!-- 映画の視聴リンクがある場合は表示 -->
 <p>視聴リンク: <%= link_to @movie.streaming_url, @movie.streaming_url if @movie.streaming_url.present? %></p>
 
+<!-- チャットボタンを追加 -->
+<%= link_to "チャットに参加する", movie_chats_path(@movie), class: "btn btn-primary" %>
+
 <!-- 映画を編集するリンク -->
 <%= link_to "編集", edit_movie_path(@movie), class: "btn btn-warning" %>
 

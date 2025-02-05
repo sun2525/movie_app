@@ -1,0 +1,21 @@
+<h1><%= @movie.title %> のチャット</h1>
+
+<div class="chat-box">
+  <% @chats.each do |chat| %>
+    <div class="chat-message">
+      <strong><%= chat.user.name %>:</strong>
+      <p><%= chat.message %></p>
+    </div>
+  <% end %>
+</div>
+
+<!-- 新しいメッセージを投稿 -->
+<%= form_with model: [@movie, @chat], local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :message, "メッセージ" %>
+    <%= f.text_area :message, class: "form-control", rows: 3 %>
+  </div>
+  <%= f.submit "送信", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "映画詳細に戻る", movie_path(@movie), class: "btn btn-secondary mt-3" %>
