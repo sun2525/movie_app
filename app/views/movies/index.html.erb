@@ -1,13 +1,36 @@
-<h1>映画一覧</h1>
+<%= render "shared/header" %>
 
-<!-- 映画の新規投稿ページへのリンク -->
-<%= link_to "新規投稿", new_movie_path, class: "btn btn-primary" %>
+<div class="container mt-4">
+  <h1 class="mb-4">映画一覧</h1>
 
-<ul>
-  <% @movies.each do |movie| %>
-    <li>
-      <!-- 映画のタイトルをクリックすると詳細ページに移動 -->
-      <%= link_to movie.title, movie %> - <%= movie.description %>
-    </li>
-  <% end %>
-</ul>
+  <!-- 新規投稿ボタン -->
+  <%= link_to "新規投稿", new_movie_path, class: "btn btn-primary mb-3" %>
+
+  <!-- 並び替えボタン -->
+  <div class="mb-3">
+    <%= link_to "新着順", movies_path(sort: "new"), class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "人気順", movies_path(sort: "popular"), class: "btn btn-outline-secondary" %>
+  </div>
+
+  <!-- 映画一覧 -->
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <% if movie.image.present? %>
+            <%= image_tag movie.image, class: "card-img-top", alt: movie.title %>
+          <% else %>
+            <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to movie.title, movie, class: "text-decoration-none text-dark" %>
+            </h5>
+            <p class="card-text"><%= movie.description.truncate(50) %></p>
+            <p class="text-muted small">投稿者: <%= movie.user.name %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

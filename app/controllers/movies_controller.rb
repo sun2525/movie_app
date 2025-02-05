@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
   def create
     @movie = current_user.movies.build(movie_params)  # current_user を利用
     if @movie.save
-      redirect_to @movie, notice: "映画を投稿しました！"
+      redirect_to movies_path, notice: "映画を投稿しました！"
     else
       render :new, status: :unprocessable_entity  # 投稿ページを再表示
     end
@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   # 映画情報を更新
   def update
     if @movie.update(movie_params)  # 入力データを更新
-      redirect_to @movie, notice: "映画情報を更新しました！"
+      redirect_to movies_path, notice: "映画情報を更新しました！"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
 
   # フォームから送信されたパラメータを許可する
   def movie_params
-    params.require(:movie).permit(:title, :description, :streaming_url)
+    params.require(:movie).permit(:title, :description, :streaming_url, :image)
   end
 
   # 投稿者以外をトップページにリダイレクト
