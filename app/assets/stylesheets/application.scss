@@ -1,0 +1,19 @@
+	
+@import "bootstrap";
+
+.default-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%; /* 丸くする */
+  object-fit: cover; /* 画像の比率を保ちながら枠内に収める */
+  border: 2px solid #ccc; /* 枠線を追加（オプション） */
+}
+
+.avatar-icon {
+  width: 70px; /* アイコンの横幅 */
+  height: 70px; /* アイコンの縦幅 */
+  border-radius: 50%; /* 丸くする */
+  object-fit: cover; /* 画像の比率を保ちながら枠内に収める */
+  border: 2px solid #ccc; /* 枠線を追加（オプション） */
+}
+
