@@ -1,0 +1,41 @@
+<%= render "shared/header" %>
+<h1><%= @user.name %> さんのプロフィール</h1>
+
+<!-- プロフィール画像 -->
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), class: "img-thumbnail" %>
+<% else %>
+  <img src="https://via.placeholder.com/150?text=No+Image" class="img-thumbnail">
+<% end %>
+
+<p><strong>メールアドレス:</strong> <%= @user.email %></p>
+
+<% if current_user == @user %>
+  <%= link_to "プロフィールを編集", edit_user_path(@user), class: "btn btn-warning" %>
+<% end %>
+
+<!-- 投稿した映画の一覧 -->
+<h2>投稿した映画</h2>
+<% if @movies.any? %>
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <% if movie.image.attached? %>
+            <%= image_tag movie.image.variant(resize_to_limit: [300, 200]), class: "card-img-top" %>
+          <% else %>
+            <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to movie.title, movie_path(movie), class: "text-decoration-none text-dark" %></h5>
+            <p class="card-text"><%= movie.description.truncate(50) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだ映画を投稿していません。</p>
+<% end %>
+
+<%= link_to "トップページへ戻る", movies_path, class: "btn btn-secondary mt-3" %>

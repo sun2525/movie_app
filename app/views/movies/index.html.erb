@@ -27,7 +27,8 @@
               <%= link_to movie.title, movie, class: "text-decoration-none text-dark" %>
             </h5>
             <p class="card-text"><%= movie.description.truncate(50) %></p>
-            <p class="text-muted small">投稿者: <%= movie.user.name %></p>
+            <p class="text-muted small">投稿者: <%= link_to movie.user.name, user_path(movie.user) %></p>
+
           </div>
         </div>
       </div>

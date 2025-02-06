@@ -1,33 +1,24 @@
-<div class='account-page' id='account-page'>
-  <div class='account-page__inner clearfix'>
-    <div class='account-page__inner--left account-page__header'>
-      <h2>Edit Account</h2>
-      <h5>アカウントの編集</h5>
-      <%= link_to "ログアウト", "#", class: 'btn'%>
-      <%= link_to "チャットページに戻る", :back, class: 'btn'%>
-    </div>
-    <div class='account-page__inner--right user-form'>
-      <%= form_with model: current_user, local: true do |f|%>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :name%>
-          </div>
-          <div class='field-input'>
-            <%= f.text_field :name, autofocus: true%>
-          </div>
-        </div>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :email%>
-          </div>
-          <div class='field-input'>
-            <%= f.email_field :email%>
-          </div>
-        </div>
-        <div class='actions'>
-          <%= f.submit "Update", class: 'btn'%>
-        </div>
-      <% end %>
-    </div>
+<%= render "shared/header" %>
+<h1>プロフィールを編集</h1>
+
+<%= render "shared/error_messages", model: @user %>
+
+<%= form_with model: @user, local: true, html: { multipart: true } do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-</div>
+
+  <div class="mb-3">
+    <%= f.label :avatar, "プロフィール画像" %>
+    <% if @user.avatar.attached? %>
+      <div class="mb-2">
+        <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), class: "img-thumbnail" %>
+      </div>
+    <% end %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+
+  <%= f.submit "更新する", class: "btn btn-primary" %>
+  <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary ms-2" %>
+<% end %>

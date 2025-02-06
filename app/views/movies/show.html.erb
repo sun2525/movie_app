@@ -1,4 +1,12 @@
+<%= render "shared/header" %>
 <h1><%= @movie.title %></h1>
+
+<!-- 映画の画像を表示（ある場合のみ） -->
+<% if @movie.image.attached? %>
+  <%= image_tag @movie.image.variant(resize_to_limit: [500, 300]), class: "img-fluid mb-3" %>
+<% else %>
+  <img src="https://via.placeholder.com/500x300?text=No+Image" class="img-fluid mb-3" alt="No Image">
+<% end %>
 
 <!-- 映画の説明を表示 -->
 <p><%= @movie.description %></p>
@@ -13,4 +21,4 @@
 <%= link_to "編集", edit_movie_path(@movie), class: "btn btn-warning" %>
 
 <!-- 映画を削除するボタン -->
-<%= link_to "削除", movie_path, data: {turbo_method: :delete}, class: "btn btn-danger" %>
+<%= link_to "削除", movie_path(@movie), data: { turbo_method: :delete }, class: "btn btn-danger" %>
