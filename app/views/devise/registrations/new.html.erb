@@ -40,6 +40,16 @@
             <%= f.password_field :password_confirmation, autocomplete: "off"%>
           </div>
         </div>
+        <!-- アバター画像アップロードフィールドを追加 -->
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :avatar, "プロフィール画像" %>
+          </div>
+          <div class='field-input'>
+            <%= f.file_field :avatar, class: "form-control" %>
+          </div>
+        </div>
+
         <div class='actions'>
           <%= f.submit "Create Account", class: 'btn'%>
         </div>

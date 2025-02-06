@@ -1,9 +1,8 @@
 <%= render "shared/header" %>
 <h1>プロフィールを編集</h1>
 
-<%= render "shared/error_messages", model: @user %>
-
 <%= form_with model: @user, local: true, html: { multipart: true } do |f| %>
+<%= render "shared/error_messages", model: @user %>
   <div class="mb-3">
     <%= f.label :name, "名前" %>
     <%= f.text_field :name, class: "form-control" %>
