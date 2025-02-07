@@ -10,8 +10,9 @@ class ChatsController < ApplicationController
   def create
     @chat = @movie.chats.build(chat_params)
     @chat.user = current_user
+
     if @chat.save
-      redirect_to movie_chats_path(@movie), notice: "メッセージを送信しました！"
+      ChatChannel.broadcast_to(@movie, { chat: @chat, user: @chat.user })
     else
       @chats = @movie.chats.includes(:user).order(created_at: :asc)
       render :index, status: :unprocessable_entity

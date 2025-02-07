@@ -1,15 +1,19 @@
-import consumer from "channels/consumer"
+import consumer from "channels/consumer";
 
-consumer.subscriptions.create("ChatChannel", {
-  connected() {
-    // Called when the subscription is ready for use on the server
-  },
+if (location.pathname.match(/\/movies\/\d+\/chats/)) {
+  console.log("読み込み完了");
 
-  disconnected() {
-    // Called when the subscription has been terminated by the server
-  },
+  consumer.subscriptions.create("ChatChannel", {  // ✅ "ChatChannel" を正しく指定
+    connected() {
+      console.log("WebSocket接続成功");
+    },
 
-  received(data) {
-    // Called when there's incoming data on the websocket for this channel
-  }
-});
+    disconnected() {
+      console.log("WebSocket切断");
+    },
+
+    received(data) {
+      console.log("受信データ:", data);
+    }
+  });
+}
