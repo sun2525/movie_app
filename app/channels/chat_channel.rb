@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    movie = Movie.find(params[:movie_id]) # 映画IDを取得
-    stream_for movie # 映画ごとに個別のストリームを作成
+    @movie = Movie.find(params[:movie_id]) # 追記
+    stream_for @movie # 追記
   end
 
   def unsubscribed
