@@ -1,26 +1,27 @@
 <%= render "shared/header" %>
-<h1><%= @movie.title %> のチャット</h1>
+<div class="container chat-container">
+  <h1 class="chat-title"><%= @movie.title %> のチャット</h1>
 
-<!-- 新しいメッセージを投稿 -->
-<div id="chats">
-  <h4>＜コメント一覧＞</h4>
+  <!-- チャットメッセージ一覧 -->
+  <div id="chats" class="chat-box">
     <% @movie.chats.each do |chat| %>
-      <div class="chat">
-        <p class="user-info"><%= chat.user.name %>: </p>
-        <p><%= chat.message%></p>
+      <div class="chat-message <%= chat.user == current_user ? 'my-message' : 'other-message' %>">
+        <p class="user-info"><%= chat.user.name %></p>
+        <div class="message-bubble"><%= chat.message %></div>
       </div>
     <% end %>
-</div>
+  </div>
 
-<div class="chat-form">
+  <!-- 新しいメッセージを投稿 -->
+  <div class="chat-form">
   <% if user_signed_in? %>
-    <%= form_with model: [@movie, @chat], id: "chat-form" do |f| %>
-      <%= f.text_area :message , class: "chat-text"%>
-      <%= f.submit "コメントをする", class: "chat-submit" %>
+    <%= form_with model: [@movie, @chat], id: "chat-form", class: "d-flex" do |f| %>
+      <%= f.text_area :message, class: "chat-text", placeholder: "メッセージを入力..." %>
+      <%= f.submit "送信", class: "chat-submit btn btn-primary" %>
     <% end %>
   <% end %>
 </div>
 
 
-
-<%= link_to "映画詳細に戻る", movie_path(@movie), class: "btn btn-secondary mt-3" %>
+  <%= link_to "映画詳細に戻る", movie_path(@movie), class: "btn btn-secondary mt-3" %>
+</div>
