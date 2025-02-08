@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-current-user-id="<%= current_user.id if user_signed_in? %>">
     <%= yield %>
   </body>
 </html>

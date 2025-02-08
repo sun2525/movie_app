@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
-  get 'chats/index'
-  get 'chats/create'
   devise_for :users
   # ユーザーのプロフィールページを追加
   resources :users, only: [:show, :edit, :update]
