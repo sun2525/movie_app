@@ -9,9 +9,15 @@ class ChatsController < ApplicationController
 
   def create
     @chat = @movie.chats.new(chat_params)
-    @Movie = Movie.find(params[:movie_id]) #追加
     if @chat.save
-      ChatChannel.broadcast_to @Movie, { chat: @chat, user: @chat.user }
+      # ブロードキャストデータの送信
+      ChatChannel.broadcast_to @movie, { 
+        chat: @chat, 
+        user: {
+          id: @chat.user.id,
+          name: @chat.user.name
+        }
+      }
       head :no_content
     else
       @chats = @movie.chats.includes(:user).order(created_at: :asc)
@@ -26,6 +32,6 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:message).merge(user_id: current_user.id, movie_id: params[:movie_id])
+    params.require(:chat).permit(:message).merge(user_id: current_user.id)
   end
 end

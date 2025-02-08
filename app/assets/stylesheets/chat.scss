@@ -1,6 +1,6 @@
 /* チャット全体のコンテナ */
 .chat-container {
-  max-width: 600px;
+  max-width: 800px; /* コンテナの幅を少し広げる */
   margin: 0 auto;
   padding: 20px;
 }
@@ -15,12 +15,13 @@
 
 /* チャットメッセージ一覧 */
 .chat-box {
-  height: 400px;
+  height: 60vh; /* ウィンドウの高さの60%に合わせる */
   overflow-y: auto;
   border: 1px solid #ddd;
   padding: 10px;
   background: #f8f9fa;
   border-radius: 8px;
+  box-sizing: border-box; /* パディングを含む高さに調整 */
 }
 
 /* メッセージの共通スタイル */
@@ -29,6 +30,7 @@
   flex-direction: column;
   margin-bottom: 10px;
   max-width: 80%;
+  word-wrap: break-word; /* 長い単語を適切に折り返す */
 }
 
 /* 自分のメッセージ */
@@ -48,14 +50,15 @@
   padding: 10px;
   border-radius: 15px;
   display: inline-block;
-  max-width: 100%;
-  word-wrap: break-word;
+  max-width: 100%; /* 吹き出しの幅をコメント内容に応じて調整 */
+  word-wrap: break-word; /* 長い単語を折り返す */
+  box-sizing: border-box;
 }
 
 /* 自分の吹き出し */
 .my-message .message-bubble {
   background: #b2d6fc;
-  color: rgb(255, 255, 255);
+  color: white;
   border-top-right-radius: 0;
 }
 
@@ -73,41 +76,28 @@
   margin-bottom: 3px;
 }
 
-.chat-input {
-  flex-grow: 1;
-  border-radius: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  resize: none;
-  height: 40px;
-}
-
+/* 入力欄と送信ボタン */
 .chat-form {
   display: flex;
-  align-items: center; /* 垂直方向を中央揃えにする */
+  align-items: center;
   gap: 10px; /* 入力欄とボタンの間に余白をつける */
+  margin-top: 10px;
 }
 
 .chat-text {
   flex: 1; /* 入力欄を可能な限り広げる */
-  height: 40px; /* 高さを統一する */
-  font-size: 16px; /* フォントサイズを調整（オプション） */
-  border-radius: 8px; /* 角を丸くする */
-  padding: 5px; /* 内側の余白を追加 */
+  height: 40px;
+  width: 650px;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 0 10px 20px;
+  border: 1px solid #ddd;
 }
 
 .chat-submit {
-  height: 40px; /* 入力欄と同じ高さにする */
-  padding: 0 20px; /* ボタンに適切な余白を追加 */
-  font-size: 16px; /* フォントサイズを調整（オプション） */
-  border-radius: 8px; /* ボタンの角を丸くする */
-}
-
-#chats {
-  height: 400px; /* 必要に応じて高さを調整 */
-  overflow-y: scroll; /* 縦方向のスクロールを有効にする */
-  border: 1px solid #ddd; /* 枠線を追加（オプション） */
-  padding: 10px; /* 内側の余白を追加 */
-  background-color: #f9f9f9; /* 背景色を設定（オプション） */
-  border-radius: 8px; /* 角を丸くする（オプション） */
+  height: 40px;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 8px;
 }

@@ -4,10 +4,11 @@ if (location.pathname.match(/\/movies\/\d+\/chats/)) {
   document.addEventListener("DOMContentLoaded", () => {
     const chats = document.getElementById("chats");
     if (chats) {
-      chats.scrollTop = chats.scrollHeight; // チャットボックスのスクロールを一番下に移動
+      // 初回ロード時にスクロール位置を一番下に設定
+      chats.scrollTop = chats.scrollHeight;
     }
   });
-  
+
   console.log("ChatChannel 読み込み完了");
 
   consumer.subscriptions.create({
@@ -37,7 +38,7 @@ if (location.pathname.match(/\/movies\/\d+\/chats/)) {
       if (chats) {
         chats.insertAdjacentHTML("beforeend", html);
 
-        // 最新コメントにスクロール
+        // 新しいコメントが追加された後にスクロールを一番下に移動
         chats.scrollTop = chats.scrollHeight;
       } else {
         console.error("chats 要素が見つかりません");
@@ -45,6 +46,7 @@ if (location.pathname.match(/\/movies\/\d+\/chats/)) {
 
       const chatForm = document.getElementById("chat-form");
       if (chatForm) {
+        // 入力欄をリセット
         chatForm.reset();
       } else {
         console.error("chat-form が見つかりません");
