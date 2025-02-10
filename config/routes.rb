@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   end
     
   root "movies#index"  # トップページを映画一覧に設定
+  get 'movies/search', to: 'movies#search'
+
 end

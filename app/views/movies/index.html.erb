@@ -3,6 +3,32 @@
 <div class="container mt-4">
   <h1 class="mb-4">映画一覧</h1>
 
+  <!-- 検索結果の表示 -->
+  <% if @search_results.present? && @search_results["results"] %>
+    <div class="mb-4">
+      <h2>検索結果:</h2>
+      <div class="row">
+        <% @search_results["results"].each do |movie| %>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <% if movie["poster_path"].present? %>
+                <%= image_tag "https://image.tmdb.org/t/p/w300#{movie["poster_path"]}", class: "card-img-top", alt: movie["title"] %>
+              <% else %>
+                <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
+              <% end %>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><%= movie["title"] %></h5>
+                <p class="card-text flex-grow-1"><%= movie["overview"].truncate(100) %></p>
+                <p class="text-muted small">公開日: <%= movie["release_date"] %></p>
+                <p class="text-muted small">評価: <%= movie["vote_average"] %> / 10</p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <!-- 新規投稿ボタン -->
   <%= link_to "新規投稿", new_movie_path, class: "btn btn-primary mb-3" %>
 
@@ -16,7 +42,7 @@
   <div class="row">
     <% @movies.each do |movie| %>
       <div class="col-md-4 mb-4">
-        <div class="card h-100"> <!-- h-100で高さを統一 -->
+        <div class="card h-100">
           <% if movie.image.present? %>
             <%= image_tag movie.image.variant(resize_to_fill: [300, 200]), class: "card-img-top", alt: movie.title %>
           <% else %>

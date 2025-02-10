@@ -10,7 +10,14 @@ class MoviesController < ApplicationController
   # 映画一覧を表示するアクション（トップページ）
   def index
     @movies = Movie.includes(:user).order(created_at: :desc) # 映画を取得して新しい順に表示
+  
+    # 検索クエリが存在する場合にTMDb APIを使って映画情報を取得
+    if params[:search].present?
+      tmdb_service = TmdbApiService.new
+      @search_results = tmdb_service.search_movies(params[:search])
+    end
   end
+  
 
   # 映画の詳細ページ
   def show
