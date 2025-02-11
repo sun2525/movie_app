@@ -12,7 +12,7 @@
         <!-- 検索フォーム -->
         <li class="nav-item">
           <%= form_with url: movies_path, method: :get, local: true, class: "d-flex" do |f| %>
-            <%= f.text_field :search, class: "form-control me-2", placeholder: "映画を検索" %>
+            <%= f.text_field :query, class: "form-control me-2", placeholder: "映画を検索" %>
             <%= f.submit "検索", class: "btn btn-outline-primary" %>
           <% end %>
         </li>

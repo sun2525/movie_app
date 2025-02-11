@@ -1,0 +1,27 @@
+@import "bootstrap";
+
+.movie-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.movie-card {
+  flex: 0 0 auto;
+  width: 200px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.movie-title {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}

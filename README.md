@@ -34,7 +34,7 @@
 |----------------|------------|--------------------------------|
 | message        | text       | null: false                    |
 | user           | references | null: false, foreign_key: true |
-| movie           | references | null: false, foreign_key: true |
+| movie          | references | null: false, foreign_key: true |
 
 #### Association
 

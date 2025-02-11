@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  # ユーザーのプロフィールページを追加
+
+  # **ユーザーのプロフィールページ**
   resources :users, only: [:show, :edit, :update]
 
-  resources :movies do
-    resources :chats, only: [:index, :create]
+  # **映画のルート（投稿機能は不要なので `only: [:index, :show]` に変更）**
+  resources :movies, only: [:index, :show] do
+    resources :chats, only: [:index, :create] # **チャット機能**
   end
-    
-  root "movies#index"  # トップページを映画一覧に設定
-  get 'movies/search', to: 'movies#search'
+  
+  # **トップページを映画一覧に設定**
+  root "movies#index"
 
+  # **映画検索**
+  get 'movies/search', to: 'movies#search'
 end

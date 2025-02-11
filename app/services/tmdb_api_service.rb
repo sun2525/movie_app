@@ -7,20 +7,47 @@ class TmdbApiService
     @api_key = api_key
   end
 
-  # 映画を検索するメソッド
-  def search_movies(query, language = "ja-JP")
+  # 🎬 最新映画を取得
+  def fetch_latest_movies(language = "ja-JP")
     response = HTTParty.get(
-      "#{BASE_URL}/search/movie",
+      "#{BASE_URL}/movie/now_playing",
       query: {
         api_key: @api_key,
-        query: query,
-        language: language
+        language: language,
+        page: 1
       }
     )
     handle_response(response)
   end
 
-  # 映画の詳細を取得するメソッド
+  # ⭐ 人気映画（おすすめ映画）を取得
+  def fetch_popular_movies(language = "ja-JP")
+    response = HTTParty.get(
+      "#{BASE_URL}/movie/popular",
+      query: {
+        api_key: @api_key,
+        language: language,
+        page: 1
+      }
+    )
+    handle_response(response)
+  end
+
+  # 🔍 映画検索メソッド
+  def search_movies(query, language = "ja-JP")
+    response = HTTParty.get(
+      "#{BASE_URL}/search/movie",
+      query: {
+        api_key: @api_key,
+        language: language,
+        query: query,
+        page: 1
+      }
+    )
+    handle_response(response)
+  end
+
+  # 🎞️ 映画の詳細を取得
   def movie_details(movie_id, language = "ja-JP")
     response = HTTParty.get(
       "#{BASE_URL}/movie/#{movie_id}",
@@ -34,12 +61,22 @@ class TmdbApiService
 
   private
 
-  # レスポンスを処理するヘルパーメソッド
+  # 🛠️ レスポンスを処理するメソッド
   def handle_response(response)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      { error: "Failed to fetch data", status: response.code, message: response.message }
+    begin
+      if response.code == 200
+        body = JSON.parse(response.body)
+        body["results"] || body # `results` がなければそのまま返す
+      else
+        Rails.logger.error "❌ TMDb API エラー: #{response.code} - #{response.message} | レスポンス: #{response.body}"
+        []
+      end
+    rescue JSON::ParserError => e
+      Rails.logger.error "🚨 JSON パースエラー: #{e.message} | レスポンス: #{response.body}"
+      []
+    rescue StandardError => e
+      Rails.logger.error "🚨 予期しないエラー: #{e.message}"
+      []
     end
   end
 end

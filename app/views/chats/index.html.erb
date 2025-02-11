@@ -1,27 +1,40 @@
 <%= render "shared/header" %>
 <div class="container chat-container">
-  <h1 class="chat-title"><%= @movie.title %> のチャット</h1>
+  <div class="row">
+    <!-- 映画情報 -->
+    <div class="col-md-4">
+      <h2><%= @movie_details["title"] %></h2>
+      <img src="https://image.tmdb.org/t/p/w300<%= @movie_details['poster_path'] %>" alt="<%= @movie_details['title'] %>">
+      <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
+      <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
+    </div>
 
-  <!-- チャットメッセージ一覧 -->
-  <div id="chats" class="chat-box">
-    <% @movie.chats.each do |chat| %>
-      <div class="chat-message <%= chat.user == current_user ? 'my-message' : 'other-message' %>">
-        <p class="user-info"><%= chat.user.name %></p>
-        <div class="message-bubble"><%= chat.message %></div>
+    <!-- チャット欄 -->
+    <div class="col-md-8">
+      <h1 class="chat-title"><%= @movie_details["title"] %> のチャット</h1>
+      <div id="chats" class="chat-box">
+        <% if @chats.present? %>
+          <% @chats.each do |chat| %>
+            <div class="chat-message <%= chat.user == current_user ? 'my-message' : 'other-message' %>">
+              <p class="user-info"><%= chat.user.name %></p>
+              <div class="message-bubble"><%= chat.message %></div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>まだメッセージがありません。</p>
+        <% end %>
       </div>
-    <% end %>
+
+      <!-- チャットフォーム -->
+      <div class="chat-form">
+        <% if user_signed_in? %>
+          <%= form_with model: [@movie_id, @chat], url: movie_chats_path(@movie_id), id: "chat-form", class: "d-flex" do |f| %>
+            <%= f.text_area :message, class: "chat-text", placeholder: "メッセージを入力..." %>
+            <%= f.submit "送信", class: "chat-submit btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+      <%= link_to "映画詳細に戻る", movie_path(@movie_details["id"]), class: "btn btn-secondary mt-3" %>
+    </div>
   </div>
-
-  <!-- 新しいメッセージを投稿 -->
-  <div class="chat-form">
-  <% if user_signed_in? %>
-    <%= form_with model: [@movie, @chat], id: "chat-form", class: "d-flex" do |f| %>
-      <%= f.text_area :message, class: "chat-text", placeholder: "メッセージを入力..." %>
-      <%= f.submit "送信", class: "chat-submit btn btn-primary" %>
-    <% end %>
-  <% end %>
-</div>
-
-
-  <%= link_to "映画詳細に戻る", movie_path(@movie), class: "btn btn-secondary mt-3" %>
 </div>
