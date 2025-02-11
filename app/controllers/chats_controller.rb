@@ -1,18 +1,22 @@
 class ChatsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_movie
 
   def index
-    @chats = @movie.chats.includes(:user)
+    # TMDb の映画 ID に基づいてチャットを取得
+    @chats = Chat.where(movie_id: @movie_id).order(created_at: :asc)
     @chat = Chat.new
   end
 
   def create
-    @chat = @movie.chats.new(chat_params)
+    @chat = Chat.new(chat_params)
+    @chat.movie_id = params[:movie_id] # TMDb の映画 ID を保存
+    @chat.user = current_user
+
     if @chat.save
-      # ブロードキャストデータの送信
-      ChatChannel.broadcast_to @movie, { 
-        chat: @chat, 
+      Rails.logger.info "📡 ブロードキャスト開始: chat_#{@chat.movie_id}"
+      # リアルタイムチャットの配信
+      ActionCable.server.broadcast "chat_#{@movie_id}", { 
+        chat: @chat,
         user: {
           id: @chat.user.id,
           name: @chat.user.name
@@ -20,7 +24,8 @@ class ChatsController < ApplicationController
       }
       head :no_content
     else
-      @chats = @movie.chats.includes(:user).order(created_at: :asc)
+       # **エラー時にも @chats を設定**
+      @chats = Chat.where(movie_id: @movie_id).order(created_at: :asc)
       render :index, status: :unprocessable_entity
     end
   end
@@ -28,10 +33,16 @@ class ChatsController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.find(params[:movie_id])
+    if params[:movie_id].present?
+      @movie_id = params[:movie_id] # TMDb API の ID
+      tmdb_service = TmdbApiService.new
+      @movie_details = tmdb_service.movie_details(@movie_id) # TMDb API から映画情報を取得
+    else
+      redirect_to movies_path, alert: "映画が見つかりません。"
+    end
   end
 
   def chat_params
-    params.require(:chat).permit(:message).merge(user_id: current_user.id)
+    params.require(:chat).permit(:message)
   end
 end

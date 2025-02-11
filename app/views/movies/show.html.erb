@@ -1,24 +1,22 @@
 <%= render "shared/header" %>
-<h1><%= @movie.title %></h1>
 
-<!-- 映画の画像を表示（ある場合のみ） -->
-<% if @movie.image.attached? %>
-  <%= image_tag @movie.image.variant(resize_to_limit: [500, 300]), class: "img-fluid mb-3" %>
-<% else %>
-  <img src="https://via.placeholder.com/500x300?text=No+Image" class="img-fluid mb-3" alt="No Image">
-<% end %>
+<div class="container mt-4">
+  <h1 class="mb-4"><%= @movie_details["title"] %></h1>
+  <div class="row">
+    <div class="col-md-4">
+      <% if @movie_details["poster_path"].present? %>
+        <img src="https://image.tmdb.org/t/p/w300<%= @movie_details['poster_path'] %>" alt="<%= @movie_details['title'] %>">
+      <% else %>
+        <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image">
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <p><strong>概要:</strong> <%= @movie_details["overview"] %></p>
+      <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
+      <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
 
-<!-- 映画の説明を表示 -->
-<p><%= @movie.description %></p>
-
-<!-- 映画の視聴リンクがある場合は表示 -->
-<p>視聴リンク: <%= link_to @movie.streaming_url, @movie.streaming_url if @movie.streaming_url.present? %></p>
-
-<!-- チャットボタンを追加 -->
-<%= link_to "チャットに参加する", movie_chats_path(@movie), class: "btn btn-primary" %>
-
-<!-- 映画を編集するリンク -->
-<%= link_to "編集", edit_movie_path(@movie), class: "btn btn-warning" %>
-
-<!-- 映画を削除するボタン -->
-<%= link_to "削除", movie_path(@movie), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+      <!-- チャットボタンを追加 -->
+      <%= link_to "チャットに参加する", movie_chats_path(movie_id: params[:id]), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

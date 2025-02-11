@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    @movie = Movie.find(params[:movie_id]) # 追記
-    stream_for @movie # 追記
+    stream_from "chat_#{params[:movie_id]}"  # `stream_from` の設定を確認
+    Rails.logger.info "📡 ChatChannel サブスクライブ: chat_#{params[:movie_id]}"
   end
 
   def unsubscribed

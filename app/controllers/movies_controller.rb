@@ -1,72 +1,50 @@
 class MoviesController < ApplicationController
-  # ログイン状態でのみアクセス可能なアクションを指定
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  # 映画の詳細・編集・削除時に対象の映画を取得する
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  # ログインが必要なアクションを指定（現在は投稿機能がないため new, create, edit, update, destroy は削除）
+  before_action :authenticate_user!, only: [:edit]
+  before_action :set_movie, only: [:edit] # show では使わない
+  before_action :redirect_if_not_owner, only: [:edit]
 
-  # 投稿者以外はアクセスできないようにリダイレクトするbefore_action
-  before_action :redirect_if_not_owner, only: [:edit, :update, :destroy]
-
-  # 映画一覧を表示するアクション（トップページ）
+  # **トップページ（映画一覧）**
   def index
-    @movies = Movie.includes(:user).order(created_at: :desc) # 映画を取得して新しい順に表示
+    # **Rails の movies テーブルを取得（投稿機能削除後は使用しない）**
+    # @movies = Movie.includes(:user).order(created_at: :desc) ← 一旦コメントアウト（今後の掲示板機能で使うかも）
+
+    # **TMDb API から最新映画・おすすめ映画を取得**
+    tmdb_service = TmdbApiService.new
+    @latest_movies = tmdb_service.fetch_latest_movies # 最新の映画
+    @recommended_movies = tmdb_service.fetch_popular_movies # 人気の映画
+    # 🔍 検索結果を取得
+    if params[:query].present?
+      @search_results = tmdb_service.search_movies(params[:query]) # TMDb APIで映画検索
+    else
+      @search_results = [] # 検索結果がない場合は空の配列を設定
+    end
   end
 
-  # 映画の詳細ページ
+  # **映画の詳細ページ**
   def show
-  end
-
-  # 新規投稿ページを表示
-  def new
-    @movie = Movie.new
-  end
-
-  # 映画を投稿する処理
-  def create
-    @movie = current_user.movies.build(movie_params)  # current_user を利用
-    if @movie.save
-      redirect_to movies_path, notice: "映画を投稿しました！"
-    else
-      render :new, status: :unprocessable_entity  # 投稿ページを再表示
-    end
-  end
-
-  # 映画編集ページ
-  def edit
-  end
-
-  # 映画情報を更新
-  def update
-    if @movie.update(movie_params)  # 入力データを更新
-      redirect_to movies_path, notice: "映画情報を更新しました！"
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  # 映画を削除する処理
-  def destroy
-    @movie.destroy  # データベースから削除
-    redirect_to movies_path, notice: "映画を削除しました！"
+    tmdb_service = TmdbApiService.new
+    @movie_details = tmdb_service.movie_details(params[:id]) # TMDb API から映画の詳細情報を取得
   end
 
   private
 
-  # 指定された映画を取得するメソッド（`before_action` で使用）
+  # **Rails の `movies` テーブルを参照する set_movie メソッド（現在は使わない）**
   def set_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by(id: params[:id])
+    unless @movie
+      redirect_to movies_path, alert: "指定された映画は存在しません。"
+    end
   end
 
-  # フォームから送信されたパラメータを許可する
-  def movie_params
-    params.require(:movie).permit(:title, :description, :streaming_url, :image)
-  end
+  # **投稿機能を削除したため、movie_params メソッドも現在は不要**
+  # def movie_params
+  #   params.require(:movie).permit(:title, :description, :streaming_url, :image)
+  # end
 
-  # 投稿者以外をトップページにリダイレクト
-  def redirect_if_not_owner
-    return if current_user == @movie.user # 投稿者が一致していれば処理を進める
-
-    # 投稿者でなければ映画一覧ページにリダイレクト
-    redirect_to movies_path, alert: "この操作は許可されていません"
-  end
+  # **投稿機能を削除したため、編集権限チェックも不要**
+  # def redirect_if_not_owner
+  #   return if current_user == @movie&.user
+  #   redirect_to movies_path, alert: "この操作は許可されていません"
+  # end
 end

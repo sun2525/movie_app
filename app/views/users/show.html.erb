@@ -21,28 +21,8 @@
 
   <!-- 投稿した映画の一覧 -->
   <div class="mt-5">
-    <h2 class="text-center">投稿した映画</h2>
-    <% if @movies.any? %>
-      <div class="row justify-content-center">
-        <% @movies.each do |movie| %>
-          <div class="col-md-4 mb-4">
-            <div class="card h-100">
-              <% if movie.image.attached? %>
-                <%= image_tag movie.image.variant(resize_to_fill: [300, 200]), class: "card-img-top" %>
-              <% else %>
-                <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
-              <% end %>
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title"><%= link_to movie.title, movie_path(movie), class: "text-decoration-none text-dark" %></h5>
-                <p class="card-text flex-grow-1"><%= movie.description.truncate(50) %></p>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p class="text-center mt-4">まだ映画を投稿していません。</p>
-    <% end %>
+    <h2 class="text-center">お気に入りの映画</h2>
+    
   </div>
 
   <!-- トップページへのリンク -->
