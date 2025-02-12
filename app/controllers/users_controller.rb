@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @movies = @user.movies.order(created_at: :desc) # 投稿した映画一覧
+    @user = User.find(params[:id])
+    @favorite_movies = Favorite.where(user: @user)
   end
 
   def edit

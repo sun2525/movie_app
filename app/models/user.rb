@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_one_attached :avatar  # ActiveStorage でアバター画像を管理
   has_one :viewing, dependent: :destroy
+  has_many :favorites, dependent: :destroy  #1人のユーザーは複数の映画をお気に入りにできる
+  has_many :favorite_movies, through: :favorites, source: :movie_id   #お気に入り映画を簡単に取得できる
 
 
 # パスワードの条件: 半角英数字混合
