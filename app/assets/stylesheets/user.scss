@@ -112,3 +112,13 @@
   padding: 0;
   font-size: 13px;
 }
+
+
+/* ユーザーのプロフィール画像を円形にする */
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* 画像を円形にトリミング */
+  border-radius: 50%;
+  border: 2px solid #ccc; /* これを追加して確実に円形に！ */
+}

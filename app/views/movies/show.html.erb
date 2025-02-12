@@ -15,11 +15,12 @@
       <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
       <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
       <p><strong>👀 視聴者数:</strong> <%= Viewing.where(movie_id: @movie_details["id"], active: true).count %> 人</p>
+
 <!-- すでに視聴中の映画があるかチェック -->
 <% currently_watching = current_user.viewing %>
 
-<% if currently_watching %>
-  <% if currently_watching.movie_id == @movie_details["id"] %>
+<% if currently_watching&.active? %> <!-- 🔥 `active: true` のものを取得 -->
+  <% if currently_watching.movie_id.to_s == @movie_details["id"].to_s %> <!-- 🔥 `to_s` で型を統一 -->
     <!-- 📌 現在視聴中の映画の詳細ページにいる場合のみ「視聴終了」ボタンを表示 -->
     <p>🎥 現在視聴中</p>
     <%= button_to "視聴終了", stop_viewing_movie_path(@movie_details["id"]), method: :post, class: "btn btn-danger" %>

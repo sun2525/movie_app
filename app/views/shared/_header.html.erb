@@ -23,11 +23,10 @@
           <li class="nav-item d-flex align-items-center">
             <!-- アバター画像 -->
             <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), class: "rounded-circle me-2", alt: "アバター画像" %>
+              <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), class: "avatar-icon me-2", alt: "アバター画像" %>
             <% else %>
-              <%= image_tag "default_avatar.png",  class: "avatar-icon", alt: "デフォルトアバター" %>
+              <%= image_tag "default_avatar.png", class: "avatar-icon", alt: "デフォルトアバター" %>
             <% end %>
-            
             <!-- ユーザー名 -->
             <%= link_to current_user.name, user_path(current_user), class: "nav-link" %>
           </li>
