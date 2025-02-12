@@ -17,6 +17,7 @@
             <% end %>
             <p class="movie-title"><%= movie["title"] %></p>
           <% end %>
+          <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
         </div>
       <% end %>
     </div>
@@ -35,6 +36,7 @@
           <% end %>
           <p class="movie-title"><%= movie["title"] %></p>
         <% end %>
+        <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
       </div>
     <% end %>
   </div>
@@ -52,6 +54,7 @@
           <% end %>
           <p class="movie-title"><%= movie["title"] %></p>
         <% end %>
+        <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
       </div>
     <% end %>
   </div>
