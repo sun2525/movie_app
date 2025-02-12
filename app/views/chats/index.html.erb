@@ -7,6 +7,7 @@
       <img src="https://image.tmdb.org/t/p/w300<%= @movie_details['poster_path'] %>" alt="<%= @movie_details['title'] %>">
       <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
       <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
+      <p><strong>👀 視聴者数:</strong> <%= Viewing.where(movie_id: @movie_id, active: true).count %> 人</p>
     </div>
 
     <!-- チャット欄 -->
