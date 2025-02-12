@@ -19,11 +19,27 @@
     <% end %>
   </div>
 
-  <!-- 投稿した映画の一覧 -->
-  <div class="mt-5">
-    <h2 class="text-center">お気に入りの映画</h2>
-    
-  </div>
+  <!-- お気に入り映画の一覧 -->
+  <h2 class="text-center mt-4">🎬 お気に入りの映画</h2>
+  <% if @favorite_movies.any? %>
+    <div class="d-flex flex-wrap justify-content-center">
+      <% @favorite_movies.each do |favorite| %>
+        <% movie_details = TmdbApiService.new.movie_details(favorite.movie_id) %>
+        <div class="movie-card text-center mx-3">
+          <%= link_to movie_path(favorite.movie_id) do %>
+            <% if movie_details["poster_path"].present? %>
+              <img src="https://image.tmdb.org/t/p/w300<%= movie_details["poster_path"] %>" alt="<%= movie_details["title"] %>" class="img-fluid rounded">
+            <% else %>
+              <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image" class="img-fluid rounded">
+            <% end %>
+          <% end %>
+          <p class="mt-2"><%= movie_details["title"] %></p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center mt-3">お気に入り映画はありません。</p>
+  <% end %>
 
   <!-- トップページへのリンク -->
   <div class="text-center mt-4">

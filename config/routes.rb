@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :favorites, only: [:create, :destroy]
+
   # **トップページを映画一覧に設定**
   root "movies#index"
 
