@@ -27,6 +27,25 @@ class MoviesController < ApplicationController
     @movie_details = tmdb_service.movie_details(params[:id]) # TMDb API から映画の詳細情報を取得
   end
 
+  # **視聴開始処理**
+  def start_viewing
+    # すでに視聴中の映画がある場合、削除（1ユーザー1視聴の制限）
+    current_user.viewing&.destroy
+
+    # 新しい視聴データを作成
+    Viewing.create(user: current_user, movie_id: params[:id], active: true)
+
+    redirect_to movie_path(params[:id]), notice: "視聴を開始しました。"
+  end
+
+  # **視聴終了処理**
+  def stop_viewing
+    # 視聴中データを探し、視聴を終了
+    current_user.viewing&.destroy
+
+    redirect_to movie_path(params[:id]), notice: "視聴を終了しました。"
+  end
+
   private
 
   # **Rails の `movies` テーブルを参照する set_movie メソッド（現在は使わない）**
@@ -36,15 +55,4 @@ class MoviesController < ApplicationController
       redirect_to movies_path, alert: "指定された映画は存在しません。"
     end
   end
-
-  # **投稿機能を削除したため、movie_params メソッドも現在は不要**
-  # def movie_params
-  #   params.require(:movie).permit(:title, :description, :streaming_url, :image)
-  # end
-
-  # **投稿機能を削除したため、編集権限チェックも不要**
-  # def redirect_if_not_owner
-  #   return if current_user == @movie&.user
-  #   redirect_to movies_path, alert: "この操作は許可されていません"
-  # end
 end
