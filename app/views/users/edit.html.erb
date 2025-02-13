@@ -13,12 +13,21 @@
       </div>
 
       <div class="mb-3 text-center">
-        <%= f.label :avatar, "プロフィール画像", class: "form-label" %>
-        <% if @user.avatar.attached? %>
-          <div class="mb-2">
+        <%= f.label :avatar, "プロフィール画像", class: "form-label d-block text-center" %>
+        <div class="mb-2">
+          <% if @user.avatar.attached? %>
             <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), 
                           class: "rounded-circle shadow avatar-img" %>
-          </div>
+          <% else %>
+            <%= image_tag "default_avatar.png", 
+                          class: "rounded-circle shadow avatar-img", 
+                          style: "width: 150px; height: 150px; object-fit: cover;" %>
+          <% end %>
+        </div>
+        <% if @user.avatar.attached? %>
+          <%= link_to "現在の写真を削除", remove_avatar_user_path(@user), 
+                      data: { turbo_method: :delete, confirm: "本当に削除しますか？" },
+                      class: "btn btn-danger mb-2" %>
         <% end %>
         <%= f.file_field :avatar, class: "form-control" %>
       </div>
@@ -30,5 +39,3 @@
     <% end %>
   </div>
 </div>
-
-

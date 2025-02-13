@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   # **ユーザーのプロフィールページ**
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      delete :remove_avatar  # アバター削除用ルート
+    end
+  end
 
   # **映画のルート（投稿機能は不要なので `only: [:index, :show]` に変更）**
   resources :movies, only: [:index, :show] do
