@@ -1,0 +1,35 @@
+<div id="<%= carousel_id %>" class="carousel slide">
+  <div class="carousel-inner">
+    <% movies.each_slice(5).with_index do |movie_batch, index| %>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <div class="row justify-content-center">
+          <% movie_batch.each do |movie| %>
+            <div class="movie-card col-md-2 col-6 text-center"> <!-- ✅ ここを変更 -->
+              <%= link_to movie_path(movie["id"]) do %>
+                <% if movie["poster_path"].present? %>
+                  <img src="https://image.tmdb.org/t/p/w300<%= movie["poster_path"] %>" 
+                      alt="<%= movie["title"] %>" class="img-fluid rounded">
+                <% else %>
+                  <img src="https://via.placeholder.com/300x450?text=No+Image" 
+                      alt="No Image" class="img-fluid rounded">
+                <% end %>
+                <p class="movie-title"><%= movie["title"] %></p>
+              <% end %>
+              <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 🔄 スライドコントロール -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">前へ</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#<%= carousel_id %>" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">次へ</span>
+  </button>
+</div>

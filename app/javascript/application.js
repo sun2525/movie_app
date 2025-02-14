@@ -6,3 +6,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "channels"
+import "bootstrap";  // ✅ Bootstrap の JavaScript を適用

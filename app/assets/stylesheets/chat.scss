@@ -1,103 +1,138 @@
-/* チャット全体のコンテナ */
+/* 📌 チャット全体のコンテナ */
 .chat-container {
-  max-width: 800px; /* コンテナの幅を少し広げる */
-  margin: 0 auto;
-  padding: 20px;
+  justify-content: space-between; /* ✅ 映画情報とチャット欄の間を均等に配置 */
+  align-items: center; /* ✅ 上揃え（タイトルとチャットボックスの高さを揃える） */
+  gap: 20px; /* ✅ 映画情報とチャット欄の間に余白を設定 */
 }
 
-/* チャットタイトル */
-.chat-title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.row {
+  align-items: center; /* ✅ .row に適用すると、子要素を垂直中央揃えできる */
 }
 
-/* チャットメッセージ一覧 */
+/* 📌 サイドバー（映画情報） */
+.chat-sidebar {
+  text-align: center; /* ✅ テキストを中央揃え */
+  flex: 0 0 30%; /* ✅ 幅を30%に固定 */
+}
+
+/* 📌 映画のタイトル */
+.movie-title {
+  font-size: 22px; /* ✅ タイトルの文字サイズ */
+  font-weight: bold; /* ✅ 太字 */
+  text-align: center; /* ✅ タイトルを中央揃え */
+  margin-bottom: 10px; /* ✅ タイトル下に余白 */
+}
+
+/* 📌 映画のポスター画像 */
+.movie-poster {
+  width: 100%; /* ✅ 親要素いっぱいに表示 */
+  max-width: 250px; /* ✅ 最大幅を250pxに制限 */
+  border-radius: 10px; /* ✅ 画像の角を丸くする */
+}
+
+/* 📌 メインエリア（チャット） */
+.chat-main {
+  justify-content:center;
+  text-align: center; /* ✅ チャットタイトルを中央揃え */
+  flex: 0 0 50 /* ✅ チャット欄の幅を68%に固定 */
+}
+
+/* 📌 チャットボックス */
 .chat-box {
-  height: 60vh; /* ウィンドウの高さの60%に合わせる */
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-sizing: border-box; /* パディングを含む高さに調整 */
+  width: 100%; /* ✅ 親要素（.chat-main）の幅いっぱいに広げる */
+  height: 60vh; /* ✅ 高さをウィンドウの60%に設定 */
+  overflow-y: auto; /* ✅ 縦スクロールを有効化 */
+  border: 1px solid #ddd; /* ✅ 外枠のデザイン */
+  padding: 10px; /* ✅ 内側の余白 */
+  background: #f8f9fa; /* ✅ 背景色を薄いグレーに */
+  border-radius: 8px; /* ✅ 角を丸くする */
 }
 
-/* メッセージの共通スタイル */
+/* 📌 メッセージの共通スタイル */
 .chat-message {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  max-width: 80%;
-  word-wrap: break-word; /* 長い単語を適切に折り返す */
+  display: flex; /* ✅ 吹き出しをフレックスボックスで配置 */
+  flex-direction: column; /* ✅ 縦に積むレイアウト */
+  margin-bottom: 10px; /* ✅ メッセージ間の余白 */
+  word-wrap: break-word; /* ✅ 長い単語を適切に折り返す */
 }
 
-/* 自分のメッセージ */
+/* 📌 自分のメッセージ（右寄せ） */
 .my-message {
-  align-self: flex-end;
-  text-align: right;
+  align-self: flex-end; /* ✅ 右寄せ */
+  text-align: right; /* ✅ 文字も右寄せ */
 }
 
-/* 他のユーザーのメッセージ */
+/* 📌 相手のメッセージ（左寄せ） */
 .other-message {
-  align-self: flex-start;
-  text-align: left;
+  align-self: flex-start; /* ✅ 左寄せ */
+  text-align: left; /* ✅ 文字も左寄せ */
 }
 
-/* 吹き出し */
+/* 📌 吹き出し */
 .message-bubble {
-  padding: 10px;
-  border-radius: 15px;
-  display: inline-block;
-  max-width: 100%; /* 吹き出しの幅をコメント内容に応じて調整 */
-  word-wrap: break-word; /* 長い単語を折り返す */
-  box-sizing: border-box;
+  padding: 10px; /* ✅ 吹き出しの内側の余白 */
+  border-radius: 15px; /* ✅ 角を丸くする */
+  display: inline-block; /* ✅ コンテンツに応じた幅を持つ */
+  max-width: 70%; /* ✅ 吹き出しの幅を70%までに制限 */
+  word-wrap: break-word; /* ✅ 長い単語を折り返す */
+  box-sizing: border-box; /* ✅ パディングとボーダーを幅に含める */
 }
 
-/* 自分の吹き出し */
+/* 📌 自分の吹き出し（右寄せ） */
 .my-message .message-bubble {
-  background: #b2d6fc;
-  color: white;
-  border-top-right-radius: 0;
+  background: #b2d6fc; /* ✅ 吹き出しの背景色を青に */
+  color: white; /* ✅ 文字色を白に */
+  border-top-right-radius: 0; /* ✅ 右上の角を直角に */
+  align-self: flex-end; /* ✅ 吹き出し全体を右寄せ */
+  text-align: right; /* ✅ 文字も右寄せ */
 }
 
-/* 他人の吹き出し */
+/* 📌 相手の吹き出し（左寄せ） */
 .other-message .message-bubble {
-  background: #e9ecef;
-  color: black;
-  border-top-left-radius: 0;
+  background: #e9ecef; /* ✅ 吹き出しの背景色をグレーに */
+  color: black; /* ✅ 文字色を黒に */
+  border-top-left-radius: 0; /* ✅ 左上の角を直角に */
+  align-self: flex-start; /* ✅ 吹き出し全体を左寄せ */
+  text-align: left; /* ✅ 文字も左寄せ */
 }
 
-/* ユーザー名 */
-.user-info {
-  font-size: 12px;
-  color: gray;
-  margin-bottom: 3px;
-}
-
-/* 入力欄と送信ボタン */
+/* 📌 入力フォーム */
 .chat-form {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* 入力欄とボタンの間に余白をつける */
-  margin-top: 10px;
+  display: flex; /* ✅ フォーム要素を横並びに */
+  flex-wrap: nowrap; /* ✅ 子要素を必ず横並びに */
+  align-items: center; /* ✅ 縦中央揃え */
+  gap: 10px; /* ✅ 入力欄と送信ボタンの間に余白 */
+  margin-top: 20px; 
+  width: 100%;/* ✅ フォームの上に余白を追加 */
 }
 
+/* 📌 メッセージ入力欄 */
 .chat-text {
-  flex: 1; /* 入力欄を可能な限り広げる */
-  height: 40px;
-  width: 650px;
-  font-size: 16px;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 0 10px 20px;
-  border: 1px solid #ddd;
+  flex: 1; /* ✅ 入力欄を可能な限り広げる */
+  height: 40px; /* ✅ 高さを40pxに設定 */
+  // width: 80%; /* ✅ フォームの幅を80%にする */
+  font-size: 16px; /* ✅ 文字サイズ */
+  border-radius: 8px; /* ✅ 角を丸くする */
+  // padding: 10px; /* ✅ 内側の余白 */
+  border: 1px solid #ddd; /* ✅ 境界線 */
 }
 
+/* 📌 送信ボタン */
 .chat-submit {
-  height: 40px;
-  padding: 0 20px;
-  font-size: 16px;
-  border-radius: 8px;
+  // padding: 0 20px; /* ✅ ボタンの左右の余白 */
+  font-size: 16px; /* ✅ 文字サイズ */
+  border-radius: 8px; /* ✅ 角を丸くする */
+}
+
+/* 📌 レスポンシブ対応（画面幅が小さいとき） */
+@media (max-width: 768px) {
+  .chat-container {
+    flex-direction: column; /* ✅ スマホ表示時は縦並びに */
+    align-items: center; /* ✅ センター配置 */
+  }
+
+  .chat-sidebar,
+  .chat-main {
+    width: 100%; /* ✅ 幅を100%にして縦に並べる */
+  }
 }

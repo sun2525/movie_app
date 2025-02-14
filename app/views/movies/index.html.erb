@@ -6,57 +6,14 @@
   <!-- 🔍 検索結果セクション -->
   <% if @search_results.present? %>
     <h2>🔍 検索結果</h2>
-    <div class="movie-slider">
-      <% @search_results.each do |movie| %>
-        <div class="movie-card">
-          <%= link_to movie_path(movie["id"]) do %>
-            <% if movie["poster_path"].present? %>
-              <img src="https://image.tmdb.org/t/p/w300<%= movie["poster_path"] %>" alt="<%= movie["title"] %>">
-            <% else %>
-              <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image">
-            <% end %>
-            <p class="movie-title"><%= movie["title"] %></p>
-          <% end %>
-          <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
-        </div>
-      <% end %>
-    </div>
+    <%= render "shared/movie_carousel", movies: @search_results, carousel_id: "searchCarousel" %>
   <% end %>
 
-  <!-- 最新の映画セクション -->
+  <!-- 🎬 最新の映画 -->
   <h2>🎬 最新の映画</h2>
-  <div class="movie-slider">
-    <% @latest_movies.each do |movie| %>
-      <div class="movie-card">
-        <%= link_to movie_path(movie["id"]) do %>
-          <% if movie["poster_path"].present? %>
-            <img src="https://image.tmdb.org/t/p/w300<%= movie["poster_path"] %>" alt="<%= movie["title"] %>">
-          <% else %>
-            <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image">
-          <% end %>
-          <p class="movie-title"><%= movie["title"] %></p>
-        <% end %>
-        <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
-      </div>
-    <% end %>
-  </div>
+  <%= render "shared/movie_carousel", movies: @latest_movies, carousel_id: "latestMoviesCarousel" %>
 
-  <!-- おすすめの映画セクション -->
+  <!-- ⭐ おすすめの映画 -->
   <h2>⭐ おすすめの映画</h2>
-  <div class="movie-slider">
-    <% @recommended_movies.each do |movie| %>
-      <div class="movie-card">
-        <%= link_to movie_path(movie["id"]) do %>
-          <% if movie["poster_path"].present? %>
-            <img src="https://image.tmdb.org/t/p/w300<%= movie["poster_path"] %>" alt="<%= movie["title"] %>">
-          <% else %>
-            <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image">
-          <% end %>
-          <p class="movie-title"><%= movie["title"] %></p>
-        <% end %>
-        <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
-      </div>
-    <% end %>
-  </div>
-
+  <%= render "shared/movie_carousel", movies: @recommended_movies, carousel_id: "recommendedMoviesCarousel" %>
 </div>
