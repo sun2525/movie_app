@@ -22,3 +22,10 @@
   border-radius: 50%; /* 確実に円形にする */
   border: 2px solid #ccc; /* 枠線を追加（オプション） */
 }
+
+.top-image {
+  width: 100%;  /* 画面幅の80%にする */
+  height: auto;  /* 縦横比を保ったままリサイズ */
+  display: block; /* 画像をブロック要素にして中央揃えしやすくする */
+  margin: 0 auto; /* 中央揃え */
+}
