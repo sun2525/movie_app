@@ -1,0 +1,7 @@
+/* 📌 映画詳細ページのボタンを整理 */
+.movie-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 各ボタンの間隔を10pxに設定 */
+  width: 200px; /* ボタンの最大幅を指定 */
+}

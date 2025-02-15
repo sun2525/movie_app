@@ -1,27 +1,61 @@
-@import "bootstrap";
-
-.movie-slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  padding: 10px 0;
-}
-
+/* 🎬 映画カード全体のスタイル */
 .movie-card {
-  flex: 0 0 auto;
-  width: 200px;
-  margin-right: 10px;
-  text-align: center;
+  text-align: center; /* ✅ 中央揃えにする */
+  margin: 0 5px; /* ✅ 映画カード同士の余白を設定 */
 }
 
+/* 🎬 映画ポスター画像のスタイル */
 .movie-card img {
-  width: 100%;
-  border-radius: 8px;
+  width: 100%; /* ✅ 親要素の幅いっぱいに画像を広げる */
+  height: 300px; /* ✅ すべての画像の高さを統一 */
+  object-fit: cover; /* ✅ 画像をトリミングして同じ比率で表示 */
+  border-radius: 10px; /* ✅ 角を丸くする */
 }
 
+/* 🎬 映画タイトルのレイアウトを統一 */
 .movie-title {
-  margin-top: 5px;
-  font-size: 14px;
-  font-weight: bold;
+  width: 100%; /* ✅ 映画カードの幅に合わせる */
+  white-space: nowrap; /* ✅ 1行のみ表示（改行しない） */
+  overflow: hidden; /* ✅ はみ出た部分を非表示 */
+  text-overflow: ellipsis; /* ✅ 省略記号「…」を付ける */
+  display: block; /* ✅ 必要に応じて block 表示 */
+}
+
+/* 🎬 Bootstrap Carousel の設定 */
+
+/* ✅ `carousel-inner` の `display: flex;` を削除して中央配置 */
+.carousel-inner {
+  align-items: center; /* ✅ スライド内の映画カードを中央配置 */
+}
+
+/* ✅ `carousel-item` の `display: flex;` を削除し、幅を100%に */
+.carousel-item {
+  width: 100%; /* ✅ 各スライドの幅を100%に */
+  justify-content: center; /* ✅ 中央揃え */
+}
+
+/* 🎬 スライドの矢印ボタンをカスタマイズ */
+.carousel-control-prev, .carousel-control-next {
+  width: 50px; /* ✅ 矢印ボタンのサイズ */
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5); /* ✅ 半透明の黒背景 */
+  border-radius: 50%; /* ✅ ボタンを丸くする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%; /* ✅ 矢印を中央に配置 */
+  transform: translateY(-50%); /* ✅ 正確に中央に位置調整 */
+}
+
+/* 🎬 矢印アイコンのスタイル */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  filter: invert(50px); /* ✅ 白色の矢印に変更 */
+  width: 30px; /* ✅ 矢印アイコンのサイズを大きく */
+  height: 30px;
+}
+
+/* 🎬 矢印ボタンのホバー時のスタイル変更 */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* ✅ ホバー時に少し濃い黒にする */
 }

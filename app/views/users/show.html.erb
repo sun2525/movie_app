@@ -7,9 +7,9 @@
 
     <!-- プロフィール画像 -->
     <% if @user.avatar.attached? %>
-      <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), class: "img-thumbnail mt-3" %>
+      <%= image_tag @user.avatar.variant(resize_to_limit: [150, 150]), class: "avatar-img mt-3" %>
     <% else %>
-      <%= image_tag "default_avatar.png", class: "default-avatar", alt: "デフォルトアバター" %>
+      <%= image_tag "default_avatar.png", class: "avatar-img", alt: "デフォルトアバター" %>
     <% end %>
 
     <p class="mt-3"><strong>メールアドレス:</strong> <%= @user.email %></p>

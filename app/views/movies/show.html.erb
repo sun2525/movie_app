@@ -10,40 +10,40 @@
         <img src="https://via.placeholder.com/300x450?text=No+Image" alt="No Image">
       <% end %>
     </div>
+    
     <div class="col-md-8">
       <p><strong>概要:</strong> <%= @movie_details["overview"] %></p>
       <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
       <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
       <p><strong>👀 視聴者数:</strong> <%= Viewing.where(movie_id: @movie_details["id"], active: true).count %> 人</p>
-<!-- すでに視聴中の映画があるかチェック -->
-<% currently_watching = current_user.viewing %>
 
-<% if currently_watching %>
-  <% if currently_watching.movie_id == @movie_details["id"] %>
-    <!-- 📌 現在視聴中の映画の詳細ページにいる場合のみ「視聴終了」ボタンを表示 -->
-    <p>🎥 現在視聴中</p>
-    <%= button_to "視聴終了", stop_viewing_movie_path(@movie_details["id"]), method: :post, class: "btn btn-danger" %>
-  <% else %>
-    <!-- 📌 他の映画を視聴中の場合、「視聴開始」も「視聴終了」も表示しない -->
-    <p>⚠️ 現在「<%= TmdbApiService.new.movie_details(currently_watching.movie_id)["title"] %>」を視聴中です</p>
-    <p>視聴終了するまで他の映画は視聴できません。</p>
-  <% end %>
-<% else %>
-  <!-- 📌 どの映画も視聴していない場合のみ「視聴開始」ボタンを表示 -->
-  <%= button_to "視聴開始", start_viewing_movie_path(@movie_details["id"]), method: :post, class: "btn btn-primary" %>
-<% end %>
+      <!-- 📌 ボタンをまとめるコンテナ -->
+      <div class="movie-buttons mt-4">
+        <!-- すでに視聴中の映画があるかチェック -->
+        <% currently_watching = current_user.viewing %>
 
+        <% if currently_watching&.active? %>
+          <% if currently_watching.movie_id.to_s == @movie_details["id"].to_s %>
+            <p>🎥 現在視聴中</p>
+            <%= button_to "視聴終了", stop_viewing_movie_path(@movie_details["id"]), method: :post, class: "btn btn-danger mb-2" %>
+          <% else %>
+            <p>⚠️ 現在「<%= TmdbApiService.new.movie_details(currently_watching.movie_id)["title"] %>」を視聴中です</p>
+            <p>視聴終了するまで他の映画は視聴できません。</p>
+          <% end %>
+        <% else %>
+          <%= button_to "視聴開始", start_viewing_movie_path(@movie_details["id"]), method: :post, class: "btn btn-primary mb-2" %>
+        <% end %>
 
-<% if Favorite.exists?(user: current_user, movie_id: @movie_details["id"]) %>
-  <%= button_to "お気に入り解除", favorite_path(movie_id: @movie_details["id"]), method: :delete, class: "btn btn-warning" %>
-<% else %>
-  <%= button_to "お気に入り登録", favorites_path(movie_id: @movie_details["id"]), method: :post, class: "btn btn-primary" %>
-<% end %>
+        <!-- お気に入り登録 / 解除 -->
+        <% if Favorite.exists?(user: current_user, movie_id: @movie_details["id"]) %>
+          <%= button_to "お気に入り解除", favorite_path(movie_id: @movie_details["id"]), method: :delete, class: "btn btn-warning mb-2" %>
+        <% else %>
+          <%= button_to "お気に入り登録", favorites_path(movie_id: @movie_details["id"]), method: :post, class: "btn btn-primary mb-2" %>
+        <% end %>
 
-
-
-      <!-- チャットボタン -->
-      <%= link_to "チャットに参加する", movie_chats_path(movie_id: params[:id]), class: "btn btn-primary mt-3" %>
+        <!-- チャットボタン -->
+        <%= link_to "チャットに参加する", movie_chats_path(movie_id: params[:id]), class: "btn btn-primary mt-2" %>
+      </div>
     </div>
   </div>
 </div>
