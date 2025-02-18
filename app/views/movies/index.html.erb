@@ -10,15 +10,15 @@
 
   <!-- 🔍 検索結果セクション -->
   <% if @search_results.present? %>
-    <h2>🔍 検索結果</h2>
+    <h2>検索結果</h2>
     <%= render "shared/movie_carousel", movies: @search_results, carousel_id: "searchCarousel" %>
   <% end %>
 
   <!-- 🎬 最新の映画 -->
-  <h2>🎬 最新の映画</h2>
+  <h2>最新の映画</h2>
   <%= render "shared/movie_carousel", movies: @latest_movies, carousel_id: "latestMoviesCarousel" %>
 
   <!-- ⭐ おすすめの映画 -->
-  <h2>⭐ おすすめの映画</h2>
+  <h2>おすすめの映画</h2>
   <%= render "shared/movie_carousel", movies: @recommended_movies, carousel_id: "recommendedMoviesCarousel" %>
 </div>

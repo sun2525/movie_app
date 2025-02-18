@@ -9,9 +9,8 @@
       <p><strong>公開日:</strong> <%= @movie_details["release_date"] %></p>
       <p><strong>評価:</strong> <%= @movie_details["vote_average"] %> / 10</p>
       <p><strong>👀 視聴者数:</strong> <%= Viewing.where(movie_id: @movie_id, active: true).count %> 人</p>
-    <%= link_to "映画詳細に戻る", movie_path(@movie_details["id"]), class: "btn btn-secondary mt-3" %>
+      <%= link_to "映画詳細に戻る", movie_path(@movie_details["id"]), class: "btn btn-secondary mt-3" %>
     </div>
-    
 
     <!-- 📌 メインエリア（チャット欄） -->
     <div class="col-md-8 chat-main">
@@ -20,8 +19,21 @@
         <% if @chats.present? %>
           <% @chats.each do |chat| %>
             <div class="chat-message <%= chat.user == current_user ? 'my-message' : 'other-message' %>">
-              <p class="user-info"><%= chat.user.name %></p>
-              <div class="message-bubble"><%= chat.message %></div>
+              <% unless chat.user == current_user %>
+                <div class="chat-user-message">
+                  <!-- ✅ ユーザーのアイコンを表示し、クリックで詳細ページへ遷移 -->
+                  <%= link_to user_path(chat.user), class: "chat-user-link" do %>
+                    <% if chat.user.avatar.attached? %>
+                      <%= image_tag chat.user.avatar.variant(resize_to_limit: [40, 40]), class: "chat-user-icon" %>
+                    <% else %>
+                      <%= image_tag "default_avatar.png", class: "chat-user-icon", alt: "デフォルトアバター" %>
+                    <% end %>
+                  <% end %>
+                  <div class="message-bubble"><%= chat.message %></div>
+                </div>
+              <% else %>
+                <div class="message-bubble"><%= chat.message %></div>
+              <% end %>
             </div>
           <% end %>
         <% else %>
@@ -38,7 +50,6 @@
           <% end %>
         <% end %>
       </div>
-      
     </div>
   </div>
 </div>
