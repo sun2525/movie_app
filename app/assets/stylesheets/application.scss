@@ -29,3 +29,24 @@
   display: block; /* 画像をブロック要素にして中央揃えしやすくする */
   margin: 0 auto; /* 中央揃え */
 }
+
+/* ロゴのスタイル */
+
+.navbar-logo{
+  width: 170px; 
+  height: auto; 
+}
+
+.second-header {
+  text-align: center; /* 中央揃え */
+}
+
+.second-logo {
+  width: 300px; /* 画像の幅を調整 */
+  height: auto; /* アスペクト比を維持 */
+}
+
+
+a[href*="password"] {
+  display: none !important;
+}

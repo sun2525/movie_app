@@ -1,10 +1,15 @@
+<% per_slide = 5 %> <!-- デフォルトはPC用の5本 -->
+<% if request.user_agent =~ /Mobile|Android/ %>
+  <% per_slide = 3 %> <!-- スマホなら3本 -->
+<% end %>
+
 <div id="<%= carousel_id %>" class="carousel slide">
   <div class="carousel-inner">
-    <% movies.each_slice(5).with_index do |movie_batch, index| %>
+    <% movies.each_slice(per_slide).with_index do |movie_batch, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <div class="row justify-content-center">
+        <div class="row flex-nowrap align-items-center">
           <% movie_batch.each do |movie| %>
-            <div class="movie-card col-md-2 col-6 text-center"> <!-- ✅ ここを変更 -->
+            <div class="movie-card col-md-2 col-4 text-center">
               <%= link_to movie_path(movie["id"]) do %>
                 <% if movie["poster_path"].present? %>
                   <img src="https://image.tmdb.org/t/p/w300<%= movie["poster_path"] %>" 
@@ -13,9 +18,11 @@
                   <img src="https://via.placeholder.com/300x450?text=No+Image" 
                       alt="No Image" class="img-fluid rounded">
                 <% end %>
-                <p class="movie-title"><%= movie["title"] %></p>
               <% end %>
-              <p>👀 視聴者数: <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人</p>
+              <p class="viewer-count">
+                👀 <%= Viewing.where(movie_id: movie["id"], active: true).count %> 人
+                ♡ <%= Favorite.where(movie_id: movie["id"]).count %> 人
+              </p>
             </div>
           <% end %>
         </div>

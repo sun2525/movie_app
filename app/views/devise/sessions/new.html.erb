@@ -1,33 +1,32 @@
-<div class='account-page' id='account-page'>
-  <div class='account-page__inner clearfix'>
-    <div class='account-page__inner--left account-page__header'>
-      <h2>Log in</h2>
-      <h5>登録しているユーザーでログイン</h5>
-      <%= render "devise/shared/links"%>
-    </div>
-    <div class='account-page__inner--right user-form'>
-      <%= form_with model: resource, as: resource_name, url: session_path(resource_name), local: true do |f|%>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :email%>
-          </div>
-          <div class='field-input'>
-            <%= f.email_field :email, autofocus: true%>
-          </div>
-          <div class='field'>
-            <div class='field-label'>
-              <%= f.label :password%>
-              <i>(英数字6文字以上)</i>
-            </div>
-            <div class='field-input'>
-              <%= f.password_field :password, autocomplete: "off"%>
-            </div>
-          </div>
-          <div class='actions'>
-            <%= f.submit "Log in", class: 'btn'%>
-          </div>
-        </div>
-      <% end %>
-    </div>
+<%= render "shared/second-header"%>
+
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title">Log in</h2>
+    <p class="login-subtitle">アカウントをお持ちの方はこちらからログイン</p>
+
+    <!-- ✅ Deviseのログインエラーを表示 -->
+  <div class='login-flash-message'>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
+  </div>
+
+    <%= form_with model: resource, as: resource_name, url: session_path(resource_name), local: true, class: "login-form" do |f| %>
+      <div class="form-group">
+        <%= f.label :email, "Name", class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, "Password", class: "form-label" %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-input" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Log in", class: "login-button" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
 </div>
