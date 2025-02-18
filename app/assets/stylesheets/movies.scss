@@ -83,3 +83,34 @@
   justify-content: center; /* 中央揃え */
   align-items: center;
 }
+
+/* 🎬 セクションタイトル（h1, h2）の中央揃え */
+.section-title {
+  text-align: center;  /* ✅ 中央揃え */
+  font-weight: bold;
+  font-size: 32px;  /* ✅ `h1` は少し大きめ */
+  margin-bottom: 20px;
+}
+
+/* 🎬 セクション見出し（h2）のスタイル */
+.movie-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* 🎬 `h2` の前後に線を追加 */
+.movie-section-title::before,
+.movie-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 15px;
+}

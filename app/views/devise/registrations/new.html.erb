@@ -1,58 +1,46 @@
-<div class='account-page' id='account-page'>
-  <div class='account-page__inner clearfix'>
-    <div class='account-page__inner--left account-page__header'>
-      <h2>Create Account</h2>
-      <h5>新規アカウントの作成</h5>
-    </div>
-    <div class='account-page__inner--right user-form'>
-      <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), local: true do |f|%>
-        <%= render "devise/shared/error_messages", resource: resource %>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :name%>
-          </div>
-          <div class='field-input'>
-            <%= f.text_field :name, autofocus: true%>
-          </div>
-        </div>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :email%>
-          </div>
-          <div class='field-input'>
-            <%= f.email_field :email%>
-          </div>
-        </div>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :password%>
-            <i>(英数字6文字以上)</i>
-          </div>
-          <div class='field-input'>
-            <%= f.password_field :password, autocomplete: "off"%>
-          </div>
-        </div>
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :password_confirmation%>
-          </div>
-          <div class='field-input'>
-            <%= f.password_field :password_confirmation, autocomplete: "off"%>
-          </div>
-        </div>
-        <!-- アバター画像アップロードフィールドを追加 -->
-        <div class='field'>
-          <div class='field-label'>
-            <%= f.label :avatar, "プロフィール画像" %>
-          </div>
-          <div class='field-input'>
-            <%= f.file_field :avatar, class: "form-control" %>
-          </div>
-        </div>
+<%= render "shared/second-header"%>
 
-        <div class='actions'>
-          <%= f.submit "Create Account", class: 'btn'%>
-        </div>
+<div class="signup-container">
+  <div class="signup-card">
+    <h2 class="signup-title">Create Account</h2>
+    <p class="signup-subtitle">新規アカウントを作成してください</p>
+
+    <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), local: true, class: "signup-form" do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <!-- Name -->
+      <div class="form-group">
+        <%= f.label :name, "Name", class: "form-label" %>
+        <%= f.text_field :name, autofocus: true, class: "form-input" %>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <%= f.label :email, "Email", class: "form-label" %>
+        <%= f.email_field :email, class: "form-input" %>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <%= f.label :password, "Password (英数字6文字以上)", class: "form-label" %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-input" %>
+      </div>
+
+      <!-- Password Confirmation -->
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Password Confirmation", class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-input" %>
+      </div>
+
+      <!-- プロフィール画像（任意） -->
+      <div class="form-group">
+        <%= f.label :avatar, "プロフィール画像 (任意)", class: "form-label" %>
+        <%= f.file_field :avatar, class: "form-input" %>
+      </div>
+
+      <!-- 登録ボタン -->
+      <div class="form-actions">
+        <%= f.submit "Create Account", class: "signup-button" %>
       </div>
     <% end %>
   </div>

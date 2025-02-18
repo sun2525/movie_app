@@ -128,3 +128,162 @@
   display: block;
   text-align: center;
 }
+
+/* 🎨 ログインページ全体の背景 */
+.login-container {
+  background-color: #2f4b6b; /* ✅ 紺色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+}
+
+/* 🎨 フォーム全体のカード */
+.login-card {
+  background-color: #ffffff; /* ✅ 白色のフォーム */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* 🎨 タイトルとサブタイトル */
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1f2d3d; /* ✅ 紺色 */
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* 🎨 フォームのスタイル */
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #385679;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* 🎨 ボタンのスタイル */
+.login-button {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0px;
+  font-size: 16px;
+  color: #1f2d3d;
+  background-color: #ffffff;
+  border: 2px solid #1f2d3d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #1f2d3d;
+  color: #ffffff;
+}
+
+/* ✅ サインアップページ全体のデザイン */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+  background-color: #2f4b6b;
+}
+
+.signup-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .signup-card {
+    width: 70%;
+    padding: 5px;
+  }
+
+  .login-card {
+    width: 70%;
+    padding: 5px;
+  }
+
+}
+
+/* ✅ タイトル */
+.signup-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2d3d;
+  margin-bottom: 10px;
+}
+
+.signup-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* ✅ ボタン */
+.signup-button {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0px;
+  color: #1f2d3d;
+  background-color: #ffffff;
+  border: 2px solid #1f2d3d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background-color: #1f2d3d;
+  color: #ffffff;
+}
+
+.login-flash-message {
+  color: #d9534f; /* Bootstrap の danger 色 */
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+}
