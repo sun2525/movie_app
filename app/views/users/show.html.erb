@@ -3,7 +3,7 @@
 <div class="container mt-4">
   <!-- プロフィール全体を中央揃え -->
   <div class="text-center">
-    <h1><%= @user.name %> さんのプロフィール</h1>
+    <h2><%= @user.name %> さんのプロフィール</h2>
 
     <!-- プロフィール画像 -->
     <% if @user.avatar.attached? %>
@@ -20,7 +20,7 @@
   </div>
 
   <!-- お気に入り映画の一覧 -->
-  <h2 class="text-center mt-4">🎬 お気に入りの映画</h2>
+  <h3 class="text-center mt-4">🎬 お気に入りの映画</h3>
   <% if @favorite_movies.any? %>
     <div class="d-flex flex-wrap justify-content-center">
       <% @favorite_movies.each do |favorite| %>
