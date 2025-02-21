@@ -69,7 +69,7 @@ SNSで映画の考察を共有している人を見て、同じ作品をリア�
 | **言語**        | Ruby 3.2.0 |
 | **フレームワーク** | Ruby on Rails 7.1.5.1 |
 | **データベース**  | PostgreSQL 14.15（本番） / MySQL 8.0（開発） |
-| **フロントエンド** | Bootstrap 5 |
+| **フロントエンド** | HTML / CSS / JavaScript / Bootstrap 5 |
 | **認証機能**    | Devise 4.9 |
 | **リアルタイム通信** | ActionCable |
 | **API連携**    | TMDb API |
