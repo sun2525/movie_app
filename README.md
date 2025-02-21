@@ -6,7 +6,7 @@ Sync Watch
 視聴者数のカウント機能やお気に入り機能を搭載し映画を通じたコミュニケーションを楽しめる
 
 ## URL
-
+https://movie-app-yjna.onrender.com
 
 ## テスト用アカウント
 テスト用Email：aaa@aaa.com
@@ -37,18 +37,19 @@ SNSで映画の考察を共有している人を見て、同じ作品をリア�
 今後は映画だけでなく、ドラマやアニメの情報も取得し、視聴体験をさらに充実させていく予定。
 
 ## 洗い出した要件
-<img src="images/Requirements.png" width="500">
+<img src="https://github.com/user-attachments/assets/c0d8b5fa-f401-4389-895c-510e663da0f8" width="500">
+
 
 ## 実装した機能についての画像やGIFおよびその説明
 |ページ|説明|
 |---|---|
-|<img src="images/top.png" width="300"/>|トップページ<br>映画一覧表示|
-|<img src="images/signin.png" width="300"/>|ユーザー新規登録ページ<br>メールアドレスとパスワードを入力すると登録できる|
-|<img src="images/login.png" width="300"/>|ユーザーログインページ<br>メールアドレスとパスワードを入力するとログインする|
-|<img src="images/movie.png" width="300"/>|映画詳細ページ<br>選択した映画の情報を表示し、視聴開始・お気に入り登録ができる|
-|<img src="images/chat.png" width="300"/>|チャットページ<br>視聴中の映画についてリアルタイムでチャットができる|
-|<img src="images/user.png" width="300"/>|ユーザー詳細ページ<br>ユーザーのプロフィール情報やお気に入り映画を表示|
-|<img src="images/profile.png" width="300"/>|プロフィール編集ページ<br>ユーザー情報（アイコン・自己紹介など）を編集できる|
+|<img src="https://github.com/user-attachments/assets/a12afb88-5c6c-4e5a-906d-9929845ec189" width="300"/>|トップページ<br>映画一覧表示|
+|<img src="https://github.com/user-attachments/assets/daa954df-6167-4e85-9c59-f04c7e653802" width="300"/>|ユーザー新規登録ページ<br>メールアドレスとパスワードを入力すると登録できる|
+|<img src="https://github.com/user-attachments/assets/ee846116-7cb2-49d6-8ab5-246abee7e9ed" width="300"/>|ユーザーログインページ<br>メールアドレスとパスワードを入力するとログインする|
+|<img src="https://github.com/user-attachments/assets/71c261c4-01a4-4d91-89df-c65f7ac68419" width="300"/>|映画詳細ページ<br>選択した映画の情報を表示し、視聴開始・お気に入り登録ができる|
+|<img src="https://github.com/user-attachments/assets/4db75d32-6912-41e2-85b1-c38215e9a3ce" width="300"/>|チャットページ<br>視聴中の映画についてリアルタイムでチャットができる|
+|<img src="https://github.com/user-attachments/assets/a2140740-d192-4b2d-ad7f-b346004d4451" width="300"/>|ユーザー詳細ページ<br>ユーザーのプロフィール情報やお気に入り映画を表示|
+|<img src="https://github.com/user-attachments/assets/d9e2da5a-e400-4f01-abdc-c808ab77da42" width="300"/>|プロフィール編集ページ<br>ユーザー情報（アイコン・自己紹介など）を編集できる|
 
 ## 実装予定の機能
 今後実装予定の機能
