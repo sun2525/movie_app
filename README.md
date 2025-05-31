@@ -8,9 +8,13 @@ Sync Watch
 ## URL
 https://movie-app-yjna.onrender.com
 
+## Basic 認証
+- ID : admin
+- Pass : 2222
+  
 ## テスト用アカウント
-  - テスト用Email：aaa@aaa.com
-  ‐ テスト用Password：aaa123
+- テスト用Email：aaa@aaa.com
+- テスト用Password：aaa123
 
 ## 利用方法
 ### 映画を視聴する
