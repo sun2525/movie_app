@@ -9,8 +9,8 @@ Sync Watch
 https://movie-app-yjna.onrender.com
 
 ## テスト用アカウント
-- テスト用Email：aaa@aaa.com
-‐ テスト用Password：aaa123
+  - テスト用Email：aaa@aaa.com
+  ‐ テスト用Password：aaa123
 
 ## 利用方法
 ### 映画を視聴する
